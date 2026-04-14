@@ -42,5 +42,23 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/form")
+    public String formPage() {
+        return "form";
+    }
 
+    @PostMapping("/tambah-mahasiswa")
+    public String tambahMahasiswa(@RequestParam String nama,
+                                  @RequestParam String nim,
+                                  @RequestParam String jenisKelamin) {
+        // Simpan data ke dalam list (menggunakan class model User)
+        User mahasiswaBaru = new User();
+        mahasiswaBaru.setUsername(nama); // Kita gunakan field username sebagai Nama
+        mahasiswaBaru.setPassword(nim);  // Kita gunakan field password sebagai NIM
+        mahasiswaBaru.setJenisKelamin(jenisKelamin); // Simpan jenis kelamin
+
+        daftarMahasiswa.add(mahasiswaBaru);
+
+        return "redirect:/home"; // Setelah submit, kembali ke halaman tabel
+    }
 }
